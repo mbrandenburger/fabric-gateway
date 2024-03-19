@@ -25,6 +25,10 @@ func newTransactionContext(signingIdentity *signingIdentity) (*transactionContex
 		return nil, err
 	}
 
+	return newTransactionContextWithNonce(signingIdentity, nonce)
+}
+
+func newTransactionContextWithNonce(signingIdentity *signingIdentity, nonce []byte) (*transactionContext, error) {
 	creator, err := signingIdentity.Creator()
 	if err != nil {
 		return nil, err

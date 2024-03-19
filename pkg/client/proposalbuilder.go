@@ -202,3 +202,14 @@ func WithEndorsingOrganizations(mspids ...string) ProposalOption {
 		return nil
 	}
 }
+
+func WithCustomNonce(nonce []byte) ProposalOption {
+	return func(builder *proposalBuilder) error {
+		customCtx, err := newTransactionContextWithNonce(builder.signingID, nonce)
+		if err != nil {
+			return err
+		}
+		builder.transactionCtx = customCtx
+		return nil
+	}
+}
